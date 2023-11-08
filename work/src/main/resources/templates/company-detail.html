@@ -1,0 +1,56 @@
+<html xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}">
+
+<body layout:fragment="body"  class="d-flex flex-column">
+	<!-- Page Content-->
+	<section class="py-5">
+		<header class="py-5 bg-light border-bottom mb-4">
+			<div class="container">
+				<div class="text-center my-5">
+					<h1 class="fw-bolder" th:text="${company.name}"></h1>
+					<p th:text="${company.description}" class="lead mb-0">A Bootstrap 5 starter layout for your next blog homepage</p>
+				</div>
+			</div>
+		</header>
+		<!-- Page content-->
+		<div class="container">
+			<div class="row">
+				<!-- Blog entries-->
+				<div class="col-lg">
+					<!-- Featured blog post-->
+					<div class="card mb-4 bg-info-subtle">
+						<a href="#!"><img class="card-img-top" th:src="${company.imgUrl}" height="750" alt="..." /></a>
+						<div class="card-body">
+							<div class="small text-muted" th:text="${#temporals.format(company.createdAt, 'dd-MMM-yyyy HH:mm')}"></div>
+							<h2 th:text="${company.name}" class="card-title">About The Company</h2>
+							<p th:text="${'Location: ' + company.location}" class="card-text"></p>
+							<a class="btn btn-light" th:href="@{/web/company/{companyId}/remove(companyId=${company.id})}">Delete</a>
+							<a class="btn btn-light" th:href="@{/web/employee/{companyId}/new(companyId=${company.id})}">Create Employee</a>
+						</div>
+					</div>
+					<!-- Nested row for non-featured blog posts-->
+					<div class="row">
+						<h2 class="mb-3">Employees</h2>
+						<div th:each="employee :${company.employees}" class="col-lg-4">
+							<!-- Blog post-->
+							<div class="card mb-4 bg-warning">
+								<a href="#!"><img class="card-img-top"
+										th:src="${employee.imgUrl}" height="300" alt="..." /></a>
+								<div class="card-body">
+									<div th:text="${#temporals.format(employee.createdAt, 'dd-MMM-yyyy HH:mm')}" class="small text-muted">January 1, 2023</div>
+									<h2  th:text="${employee.firstname + ' ' + employee.lastname}" class="card-title h4"></h2>
+									<p th:text="${employee.summary}" class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+										Reiciendis aliquid atque, nulla.</p>
+									<a class="btn btn-light" th:href="@{/web/employee/{employeeId}(employeeId=${employee.id})}">Read more →</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				
+		
+			</div>
+		</div>
+	</section>
+</body>

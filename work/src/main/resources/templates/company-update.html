@@ -1,0 +1,52 @@
+<html xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}">
+
+<body layout:fragment="body">
+	<div class="container">
+		<form role="form" method="post" th:action="@{/web/company/{companyId}/update(companyId=${company.id})}" th:object="${company}">
+			<div class="mb-3">
+				<label for="name" class="form-label">Name</label>
+				<input 
+				      type="text" 
+				      class="form-control" 
+				      id="name" name="name" 
+				      placeholder="Name" 
+				      th:field="*{name}"/>
+				<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></p>
+			</div>
+			<div class="mb-3">
+				<label for="location" class="form-label">Location</label>
+				<input 
+				      type="text" 
+				      class="form-control" 
+				      id="location" 
+				      name="location"
+				      placeholder="Location"
+				      th:field="*{location}"/>
+				<p th:if="${#fields.hasErrors('location')}" th:errors="*{location}" class="text-danger"></p>
+			</div>
+			<div class="mb-3">
+				<label for="description" class="form-label">Description</label>
+				<input 
+				      type="text" 
+				      class="form-control" 
+				      id="description"
+				      name="description" 
+				      placeholder="Description"
+				      th:field="*{description}"/>
+			</div>
+			<div class="mb-3">
+				<label for="imgUrl" class="form-label">Image URL</label>
+				<input 
+				      type="text" 
+				      class="form-control" 
+				      id="imgUrl"
+				      name="imgUrl" 
+				      placeholder="Image URL"
+				      th:field="*{imgUrl}"/>
+				<p th:if="${#fields.hasErrors('imgUrl')}" th:errors="*{imgUrl}" class="text-danger"></p>
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
+</body>
